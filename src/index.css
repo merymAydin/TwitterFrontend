@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@theme {
+  /* Color tokens — warm off-white / near-black / restrained cobalt */
+  --background: #FAF9F6;
+  --foreground: #1A1A1A;
+  --foreground-muted: #57534E;
+  --border: #E7E5E4;
+  --surface: #F5F5F0;
+  --cobalt: #1D4ED8;
+  --cobalt-hover: #1E40AF;
+
+  /* Typography — serif headings for editorial hierarchy, sans for UI */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "ui-serif", Georgia, Cambria, "Times New Roman", serif;
+
+  --font-size-display: 2.5rem;
+  --line-height-display: 3.25rem;
+  --font-weight-display: 600;
+
+  --font-size-heading: 1.5rem;
+  --line-height-heading: 2rem;
+  --font-weight-heading: 600;
+
+  --font-size-body: 1rem;
+  --line-height-body: 1.5rem;
+  --font-weight-body: 400;
+
+  --font-size-small: 0.875rem;
+  --line-height-small: 1.25rem;
+  --font-weight-small: 400;
+
+  --font-size-label: 0.875rem;
+  --line-height-label: 1.25rem;
+  --font-weight-label: 500;
+
+  /* Borders — subtle hairlines only, no shadows */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+
+  /* Spacing — 4px base grid */
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+  line-height: var(--line-height-body);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-display);
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--font-size-display);
+  line-height: var(--line-height-display);
+}
+
+h2,
+h3 {
+  font-size: var(--font-size-heading);
+  line-height: var(--line-height-heading);
+}
+
+.text-foreground-muted {
+  color: var(--foreground-muted);
+}
+
+.border-hairline {
+  border: 1px solid var(--border);
+}
+
+.bg-surface {
+  background-color: var(--surface);
+}
+
+.text-cobalt {
+  color: var(--cobalt);
+}
+
+/* Utility: readable max width for editorial content */
+.prose-width {
+  max-width: 64ch;
+}
+
+/* Utility: visually hidden but accessible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
