@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useTweets } from "../../hooks/useTweets";
-import { TweetCard } from "./TweetCard";
+import { Tweet } from "./Tweet";
 import { EmptyState } from "../common/EmptyState";
 import { ErrorMessage } from "../common/ErrorMessage";
 import { Skeleton } from "../ui/Skeleton";
@@ -10,7 +10,7 @@ export function Feed() {
 
   useEffect(() => {
     loadTweets({ page: 0, size: 20 });
-  }, [loadTweets]);
+  }, []);
 
   if (loading) {
     return (
@@ -34,12 +34,14 @@ export function Feed() {
   }
 
   return (
-    <ul className="space-y-0 border-t border-border" role="list">
-      {tweets.map((tweet) => (
-        <li key={tweet.statistics?.tweetId ?? tweet.id}>
-          <TweetCard tweet={tweet} />
-        </li>
-      ))}
-    </ul>
+    <div className="max-w-[1200px] mx-auto px-4">
+      <ul className="space-y-4" role="list">
+        {tweets.map((tweet) => (
+          <li key={tweet.statistics?.tweetId ?? tweet.id}>
+            <Tweet tweet={tweet} />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

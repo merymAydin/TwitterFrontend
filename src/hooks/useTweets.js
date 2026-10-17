@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchTweets,
@@ -12,7 +13,7 @@ export function useTweets() {
   const dispatch = useDispatch();
   const { items, current, loading, error } = useSelector((state) => state.tweets);
 
-  const loadTweets = (params) => dispatch(fetchTweets(params));
+  const loadTweets = useCallback((params) => dispatch(fetchTweets(params)), [dispatch]);
   const loadTweet = (id) => dispatch(fetchTweet(id));
   const postTweet = (tweetData) => dispatch(createTweet(tweetData));
   const like = (id) => dispatch(likeTweet(id));

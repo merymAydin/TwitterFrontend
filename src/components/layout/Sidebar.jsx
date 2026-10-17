@@ -19,11 +19,11 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="flex-shrink-0 w-64 border-r border-border bg-surface p-4">
+    <aside className="flex-shrink-0 w-[280px] border-r border-border bg-surface p-4">
       <div className="mb-6">
         <AppLink
           to={ROUTES.HOME}
-          className="flex items-center gap-2 text-cobalt font-serif text-heading"
+          className="flex items-center gap-2 text-cobalt font-serif text-[2.5rem] font-medium"
         >
           t.
         </AppLink>
@@ -35,11 +35,11 @@ export function Sidebar() {
             <AppLink
               key={item.label}
               to={item.path}
-              className="flex items-center gap-3 px-3 py-2 rounded-md text-foreground font-sans text-small hover:bg-border hover:text-cobalt transition-colors"
+              className="flex items-center gap-3 px-3 py-2 rounded-md text-foreground font-sans text-base hover:bg-border hover:text-cobalt transition-colors"
               activeClassName="bg-cobalt text-white"
             >
-              <Icon size={16} strokeWidth={1.5} />
-              <span>{item.label}</span>
+              <Icon size={24} strokeWidth={1.5} />
+              <span className="text-base">{item.label}</span>
             </AppLink>
           );
         })}
@@ -49,7 +49,7 @@ export function Sidebar() {
           onClick={handleLogout}
           className="flex items-center gap-3 px-3 py-2 rounded-md text-foreground hover:bg-border transition-colors"
         >
-          <LogOut size={16} strokeWidth={1.5} />
+          <LogOut size={24} strokeWidth={1.5} />
           <span className="text-small font-sans">Log out</span>
         </button>
       </div>

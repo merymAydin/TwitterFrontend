@@ -12,7 +12,10 @@ export const fetchTweets = createAsyncThunk(
       const response = await api.get(ENDPOINTS.FEED.LIST, {
         params: { page, size },
       });
-      return response.data;
+      const data = response.data;
+      // Backend may return a plain array or a paginated object { content: [...] }
+      const items = Array.isArray(data) ? data : (data?.content ?? data?.data ?? []);
+      return items;
     } catch (error) {
       return rejectWithValue(error.response?.data || "Failed to load tweets");
     }
