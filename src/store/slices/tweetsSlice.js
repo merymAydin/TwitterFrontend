@@ -174,15 +174,17 @@ const tweetsSlice = createSlice({
         });
       })
       .addCase(likeTweet.fulfilled, (state, action) => {
-        const updated = action.payload;
-        const index = state.items.findIndex((t) => {
-          const tweetId = t.statistics?.tweetId ?? t.id;
-          return tweetId === (updated.statistics?.tweetId ?? updated.id);
-        });
-        if (index !== -1) {
-          state.items[index] = updated;
-        }
-      })
+  const { tweetId } = action.payload;
+
+  const tweet = state.items.find(
+    (t) => (t.statistics?.tweetId ?? t.id) === tweetId
+  );
+
+  if (tweet?.statistics) {
+    tweet.statistics.likes =
+      (tweet.statistics.likes ?? 0) + 1;
+  }
+})
       .addCase(unlikeTweet.fulfilled, (state, action) => {
         const updated = action.payload;
         const index = state.items.findIndex((t) => {

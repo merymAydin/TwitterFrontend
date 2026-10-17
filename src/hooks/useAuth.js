@@ -3,7 +3,7 @@ import { login, register, logout, clearError } from "../store/slices/authSlice";
 
 export function useAuth() {
   const dispatch = useDispatch();
-  const { token, isAuthenticated, user, loading, error } = useSelector((state) => state.auth);
+  const { token, isAuthenticated, user, loading, error, registerSuccess } = useSelector((state) => state.auth);
 
   const signIn = (credentials) => dispatch(login(credentials));
   const signUp = (userData) => dispatch(register(userData));
@@ -16,6 +16,7 @@ export function useAuth() {
     user,
     loading,
     error,
+    registerSuccess,
     signIn,
     signUp,
     signOut,

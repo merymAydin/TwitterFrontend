@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "./store/slices/authSlice";
 import { AppLayout } from "./components/layout/AppLayout";
@@ -12,6 +12,9 @@ import { Profile } from "./pages/Profile";
 import { Notifications } from "./pages/Notifications";
 import { Explore } from "./pages/Explore";
 import { Settings } from "./pages/Settings";
+import { ROUTES } from "./router";
+
+const PUBLIC_PATHS = [ROUTES.LOGIN, ROUTES.REGISTER];
 
 const PublicRoutes = () => (
   <Routes>
@@ -34,6 +37,7 @@ const PrivateRoutes = () => (
 export default function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   // Synchronize Redux with localStorage: if a 401 cleared the token but Redux
   // still believes the user is authenticated (e.g. after navigation without
@@ -44,6 +48,18 @@ export default function App() {
       dispatch(logout());
     }
   }, [dispatch, isAuthenticated]);
+
+  const isPublicPath = PUBLIC_PATHS.includes(location.pathname);
+
+  // Redirect authenticated users away from login/register to home.
+  if (isAuthenticated && isPublicPath) {
+    return <Navigate to={ROUTES.HOME} replace />;
+  }
+
+  // Redirect unauthenticated users away from private routes to login.
+  if (!isAuthenticated && !isPublicPath) {
+    return <Navigate to={ROUTES.LOGIN} replace />;
+  }
 
   return (
     <>

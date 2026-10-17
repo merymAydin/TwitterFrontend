@@ -1,18 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { Input, Button, Divider, Link as AppLink } from "../components/ui";
 import { ErrorMessage } from "../components/common/ErrorMessage";
 import { ROUTES } from "../router";
 
 export function Register() {
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signUp, loading, error, clearAuthError } = useAuth();
+  const [birthday, setBirthday] = useState("");
+  const { signUp, loading, error, registerSuccess } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (registerSuccess) {
+      navigate(`${ROUTES.LOGIN}?success=true`);
+    }
+  }, [registerSuccess, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signUp({ name, email, password });
+    signUp({ username, email, password, birthday });
   };
 
   return (
@@ -23,9 +32,10 @@ export function Register() {
       </div>
       <form onSubmit={handleSubmit} className="space-y-4">
         <ErrorMessage message={error} />
-        <Input id="name" label="Name" placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} required />
+        <Input id="username" label="Username" placeholder="your-username" value={username} onChange={(e) => setUsername(e.target.value)} required />
         <Input id="email" label="Email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <Input id="password" label="Password" type="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <Input id="birthday" label="Birthday" type="date" value={birthday} onChange={(e) => setBirthday(e.target.value)} required />
         <Button type="submit" variant="primary" className="w-full" disabled={loading}>
           {loading ? "Creating account…" : "Create account"}
         </Button>

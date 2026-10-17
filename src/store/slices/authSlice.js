@@ -2,12 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/axios";
 import { ENDPOINTS } from "../../api/endpoints";
 
-// Login: POST /auth/login with JSON body { username, password }.
-// Response: plain-text JWT string (not JSON). Store raw string in localStorage.
+// Login: POST /auth/login with JSON body { email, password }.
+// Response: JSON object { "token": "JWT_TOKEN" }.
 export const login = createAsyncThunk("auth/login", async (credentials, { rejectWithValue }) => {
   try {
     const response = await api.post(ENDPOINTS.AUTH.LOGIN, credentials);
-    const token = typeof response.data === "string" ? response.data : response.data.token;
+    const token = response.data.token;
     localStorage.setItem("token", token);
     return { token, isAuthenticated: true };
   } catch (error) {
@@ -35,6 +35,7 @@ const initialState = {
   user: null,
   loading: false,
   error: null,
+  registerSuccess: false,
 };
 
 const authSlice = createSlice({
@@ -64,10 +65,12 @@ const authSlice = createSlice({
       .addCase(register.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.registerSuccess = false;
       })
       .addCase(register.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
+        state.registerSuccess = true;
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false;

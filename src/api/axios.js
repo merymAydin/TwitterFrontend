@@ -10,7 +10,7 @@ export const api = axios.create({
 });
 
 // Request interceptor: attach JWT from localStorage as Bearer token.
-// The backend returns a plain-text JWT on login, which we store raw in localStorage.
+// The backend returns a JSON object { "token": "..." } on login.
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
