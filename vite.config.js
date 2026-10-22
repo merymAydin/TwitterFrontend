@@ -7,4 +7,9 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  preview: {
+    allowedHosts: [
+      "salty-temple-95385-9c8c4b98b4a8.herokuapp.com"
+    ],
+  },
 });
