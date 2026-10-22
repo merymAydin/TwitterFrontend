@@ -5,8 +5,13 @@ export const ROUTES = {
   REGISTER: "/register",
   HOME: "/",
   TWEET_DETAIL: (id) => `/tweet/${id}`,
-  PROFILE: (username) => `/profile/${username}`,
+  // Profiles are addressed by numeric user id (GET /users/{id}); the backend has
+  // no username lookup for profile navigation.
+  PROFILE: (id) => `/profile/${id}`,
   NOTIFICATIONS: "/notifications",
   EXPLORE: "/explore",
+  BOOKMARKS: "/bookmarks",
   SETTINGS: "/settings",
+  VERIFIED: "/verified",
 };
+

@@ -1,16 +1,22 @@
+import { AIProvider } from "../../context/AIContext";
+import { AIAssistant } from "../../components/ai/AIAssistant";
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
 
 export function AppLayout({ children }) {
   return (
-    <div className="flex h-screen overflow-hidden bg-background text-foreground">
-      <Sidebar />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <Header />
-        <main className="flex-1 overflow-y-auto bg-background pt-6">
-          {children}
-        </main>
+    <AIProvider>
+      <div className="flex h-screen overflow-hidden bg-background text-foreground">
+        <Sidebar />
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <Header />
+          <main className="flex-1 overflow-y-auto bg-background px-32 pt-6 max-sm:px-4">
+            {children}
+          </main>
+        </div>
+        <AIAssistant />
       </div>
-    </div>
+    </AIProvider>
   );
 }
+

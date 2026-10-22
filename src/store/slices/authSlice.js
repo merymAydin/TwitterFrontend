@@ -25,6 +25,21 @@ export const register = createAsyncThunk("auth/register", async (userData, { rej
   }
 });
 
+// Resolves the authenticated user's private profile from GET /users/me.
+// Public user listings intentionally omit email/birthday, so the old approach
+// of matching the JWT email against GET /users can no longer identify the user.
+export const fetchCurrentUser = createAsyncThunk(
+  "auth/fetchCurrentUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.get(ENDPOINTS.USERS.ME);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Failed to load current user");
+    }
+  }
+);
+
 export const logout = createAsyncThunk("auth/logout", async () => {
   localStorage.removeItem("token");
 });
@@ -75,6 +90,12 @@ const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
+      .addCase(fetchCurrentUser.rejected, (state) => {
+        state.user = null;
       })
       .addCase(logout.fulfilled, (state) => {
         state.token = null;

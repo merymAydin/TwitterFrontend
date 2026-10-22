@@ -6,3 +6,4 @@ export function EmptyState({ title, description }) {
     </div>
   );
 }
+

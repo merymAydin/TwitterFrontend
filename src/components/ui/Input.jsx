@@ -24,3 +24,4 @@ export function Input({ id, label, type = "text", placeholder, value, onChange, 
     </div>
   );
 }
+

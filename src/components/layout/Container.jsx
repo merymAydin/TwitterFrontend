@@ -5,3 +5,4 @@ export function Container({ children, className }) {
     <div className={cn("max-w-prose-width mx-auto", className)}>{children}</div>
   );
 }
+

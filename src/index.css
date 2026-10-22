@@ -7,8 +7,16 @@
   --foreground-muted: #57534E;
   --border: #E7E5E4;
   --surface: #F5F5F0;
+  --surface-elevated: #FFFFFF;
+  --surface-hover: #EDEDE8;
   --cobalt: #1D4ED8;
   --cobalt-hover: #1E40AF;
+
+  /* Tailwind v4 only builds color utilities from --color-* tokens, so the
+     accent needs the namespaced aliases for bg-cobalt, bg-cobalt/10,
+     hover:bg-cobalt-hover and ring-cobalt to exist. */
+  --color-cobalt: #1D4ED8;
+  --color-cobalt-hover: #1E40AF;
 
   /* Typography — serif headings for editorial hierarchy, sans for UI */
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -52,6 +60,47 @@
   --spacing-16: 64px;
   --spacing-20: 80px;
   --spacing-24: 96px;
+}
+
+/* Dark theme overrides */
+.dark {
+  --background: #17191F;
+  --foreground: #E8EAF0;
+  --foreground-muted: #A1A5B2;
+  --border: #383C47;
+  --surface: #22252D;
+  --surface-elevated: #292D38;
+  --surface-hover: #292D38;
+  --sidebar-bg: #1D2028;
+  --cobalt: #3B82F6;
+  --cobalt-hover: #2563EB;
+  --color-cobalt: #3B82F6;
+  --color-cobalt-hover: #2563EB;
+}
+
+/* Dark mode: sidebar */
+.dark aside {
+  background-color: var(--sidebar-bg);
+}
+
+/* Dark mode: override white backgrounds to surface color */
+.dark .bg-white {
+  background-color: var(--surface);
+}
+
+/* Dark mode: hover states for surface */
+.dark .hover\:bg-surface:hover {
+  background-color: var(--surface-hover);
+}
+
+.dark .hover\:bg-\[var\(--surface\)\]:hover {
+  background-color: var(--surface-hover);
+}
+
+/* Dark mode: dropdowns, modals, elevated surfaces */
+.dark .shadow-lg,
+.dark .shadow-sm {
+  /* subtle border instead of shadow */
 }
 
 html {
@@ -114,6 +163,18 @@ h3 {
   background-color: var(--surface);
 }
 
+.elevated-surface {
+  background-color: var(--surface-elevated, var(--surface));
+}
+
+.border-border {
+  border-color: var(--border);
+}
+
+.divide-border > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--border);
+}
+
 .text-cobalt {
   color: var(--cobalt);
 }
@@ -134,4 +195,70 @@ h3 {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   AI Assistant widget — animations
+   Additive only. These keyframes/utilities exist solely for the
+   floating AI widget and do not alter any existing tokens or rules.
+   Adapted from the styled-components source (rotate-background-balls,
+   animate-eyes) plus a small entrance animation for messages.
+   ───────────────────────────────────────────────────────────── */
+@keyframes ai-balls-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ai-eye-blink {
+  0%,
+  44%,
+  52%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  47%,
+  49%,
+  95%,
+  97% {
+    transform: scaleY(0.16);
+  }
+}
+
+@keyframes ai-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ai-balls {
+  animation: ai-balls-spin 10s linear infinite;
+}
+
+.ai-balls-slow {
+  animation: ai-balls-spin 16s linear infinite;
+}
+
+/* Pause the orbiting blur balls while the widget is hovered (source behaviour) */
+.group:hover .ai-balls,
+.group:hover .ai-balls-slow {
+  animation-play-state: paused;
+}
+
+.ai-eye {
+  animation: ai-eye-blink 10s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.ai-rise {
+  animation: ai-rise 0.32s ease-out both;
 }

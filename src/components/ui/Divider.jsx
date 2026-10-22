@@ -6,3 +6,4 @@ export function Divider({ className }) {
     />
   );
 }
+
