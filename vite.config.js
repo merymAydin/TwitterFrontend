@@ -9,7 +9,8 @@ export default defineConfig({
   ],
   preview: {
     allowedHosts: [
-      "salty-temple-95385-9c8c4b98b4a8.herokuapp.com"
+      "salty-temple-95385-9c8c4b98b4a8.herokuapp.com",
+      "twitter.software",
     ],
   },
 });
