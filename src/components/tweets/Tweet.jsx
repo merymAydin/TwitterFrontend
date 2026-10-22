@@ -49,6 +49,18 @@ function getTimestamp(tweet) {
   return tweet?.createdAt ?? tweet?.timestamp ?? tweet?.postedAt ?? tweet?.created_at ?? null;
 }
 
+// Onboarding markers are only attached to the first feed tweet, so Scout's
+// attribute discovery produces exactly one stop per feature.
+function tourStop(anchor, step, title, text) {
+  return anchor
+    ? {
+        "data-tour": text,
+        "data-tour-step": String(step),
+        "data-tour-title": title,
+      }
+    : {};
+}
+
 // Extract the quoted/original tweet reference from a quote tweet.
 // The backend may return the original tweet as a nested object or as an ID.
 function getQuotedTweetRef(tweet) {
@@ -139,7 +151,7 @@ function parseMentions(content) {
  * variant="card"   — the compact, clickable card used by the feed/bookmarks.
  * variant="detail" — the larger, non-clickable hero used on the tweet page.
  */
-export function Tweet({ tweet, variant = "card", onReply }) {
+export function Tweet({ tweet, variant = "card", onReply, tourAnchor = false }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { openAssistant } = useAI();
@@ -360,6 +372,12 @@ export function Tweet({ tweet, variant = "card", onReply }) {
         onClick={stop}
       >
         <button
+          {...tourStop(
+            tourAnchor,
+            2,
+            "Comment",
+            "Reply to a tweet to join the conversation and share your take."
+          )}
           type="button"
           onClick={handleReply}
           aria-label="Reply"
@@ -370,6 +388,12 @@ export function Tweet({ tweet, variant = "card", onReply }) {
         </button>
         <div className="relative" ref={retweetMenuRef}>
           <button
+            {...tourStop(
+              tourAnchor,
+              3,
+              "Retweet",
+              "Tap the repeat icon to share someone else's tweet with your followers."
+            )}
             type="button"
             onClick={(e) => {
               stop(e);
@@ -608,6 +632,12 @@ export function Tweet({ tweet, variant = "card", onReply }) {
   return (
     <> 
     <article
+      {...tourStop(
+        tourAnchor,
+        4,
+        "Quote Tweet",
+        "For your own take, open the repeat menu and choose Quote Tweet."
+      )}
       onClick={openDetail}
       className="mb-4 w-full cursor-pointer rounded-xl border border-border bg-surface p-5 transition-colors hover:bg-surface"
     >

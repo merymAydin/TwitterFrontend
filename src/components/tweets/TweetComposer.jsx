@@ -67,7 +67,12 @@ export function TweetComposer() {
   };
 
   return (
-    <div className="bg-white border border-border rounded-2xl p-4 shadow-sm">
+    <div
+      className="bg-white border border-border rounded-2xl p-4 shadow-sm"
+      data-tour="Write your thoughts and hit Post to share your first tweet."
+      data-tour-step="1"
+      data-tour-title="Create a tweet"
+    >
       <form onSubmit={handleSubmit} className="flex gap-3">
         <div className="flex-shrink-0">
           <Avatar src="" username="You" size={40} />

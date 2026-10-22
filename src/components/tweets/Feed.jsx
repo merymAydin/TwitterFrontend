@@ -48,9 +48,9 @@ export function Feed() {
   return (
     <div className="w-full px-6">
       <ul className="space-y-4" role="list">
-        {tweets.map((tweet) => (
+        {tweets.map((tweet, index) => (
           <li key={tweet.statistics?.tweetId ?? tweet.id}>
-            <Tweet tweet={tweet} />
+            <Tweet tweet={tweet} tourAnchor={index === 0} />
           </li>
         ))}
       </ul>

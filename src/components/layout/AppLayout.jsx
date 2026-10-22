@@ -1,5 +1,6 @@
 import { AIProvider } from "../../context/AIContext";
 import { AIAssistant } from "../../components/ai/AIAssistant";
+import { OnboardingTour } from "../onboarding/OnboardingTour";
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
 
@@ -15,6 +16,7 @@ export function AppLayout({ children }) {
           </main>
         </div>
         <AIAssistant />
+        <OnboardingTour />
       </div>
     </AIProvider>
   );

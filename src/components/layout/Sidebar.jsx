@@ -3,7 +3,7 @@ import { AppLink } from "../ui/Link";
 import { ROUTES } from "../../router";
 import { logout } from "../../store/slices/authSlice";
 import { useTheme } from "../../context/ThemeContext";
-import { Home, Bell, Compass, Settings, LogOut, Bookmark, User, Moon, Sun } from "lucide-react";
+import { Home, Bell, Compass, Settings, LogOut, Bookmark, User, Moon, Sun, HelpCircle } from "lucide-react";
 
 export function Sidebar() {
   const dispatch = useDispatch();
@@ -27,6 +27,10 @@ export function Sidebar() {
 
   const handleLogout = () => {
     dispatch(logout());
+  };
+
+  const handleTour = () => {
+    window.dispatchEvent(new CustomEvent("tweet-tour:start"));
   };
 
   return (
@@ -56,6 +60,15 @@ export function Sidebar() {
         })}
       </nav>
       <div className="mt-auto space-y-2 pt-4 border-t border-border">
+        <button
+          onClick={handleTour}
+          className="flex items-center gap-3 px-3 py-2.5 rounded-md text-foreground font-sans text-base hover:bg-border transition-colors max-sm:justify-center max-sm:px-0 min-h-[48px] w-full"
+          aria-label="Take the guided tour"
+          title="Take a tour"
+        >
+          <HelpCircle size={24} strokeWidth={2} className="shrink-0" />
+          <span className="max-sm:hidden">Take a tour</span>
+        </button>
         <button
           onClick={toggleTheme}
           className="flex items-center gap-3 px-3 py-2.5 rounded-md text-foreground font-sans text-base hover:bg-border transition-colors max-sm:justify-center max-sm:px-0 min-h-[48px] w-full"
