@@ -50,7 +50,9 @@ function getTimestamp(tweet) {
 }
 
 // Onboarding markers are only attached to the first feed tweet, so Scout's
-// attribute discovery produces exactly one stop per feature.
+// attribute discovery produces exactly one stop per feature. Steps 2 and 5-7
+// live on that first card: the timeline itself, then its reply, retweet and
+// like/bookmark actions.
 function tourStop(anchor, step, title, text) {
   return anchor
     ? {
@@ -374,8 +376,8 @@ export function Tweet({ tweet, variant = "card", onReply, tourAnchor = false }) 
         <button
           {...tourStop(
             tourAnchor,
-            2,
-            "Comment",
+            5,
+            "Reply",
             "Reply to a tweet to join the conversation and share your take."
           )}
           type="button"
@@ -390,9 +392,9 @@ export function Tweet({ tweet, variant = "card", onReply, tourAnchor = false }) 
           <button
             {...tourStop(
               tourAnchor,
-              3,
-              "Retweet",
-              "Tap the repeat icon to share someone else's tweet with your followers."
+              6,
+              "Retweet & Quote",
+              "Tap the repeat icon to retweet, or open the menu to add your own comment with Quote Tweet."
             )}
             type="button"
             onClick={(e) => {
@@ -441,6 +443,12 @@ export function Tweet({ tweet, variant = "card", onReply, tourAnchor = false }) 
           )}
         </div>
         <button
+          {...tourStop(
+            tourAnchor,
+            7,
+            "Like & Bookmark",
+            "Tap the heart to like a post, or the bookmark icon to save it for later."
+          )}
           type="button"
           onClick={() => hasId && toggleLike(tweetId)}
           aria-label={liked ? "Unlike" : "Like"}
@@ -634,9 +642,9 @@ export function Tweet({ tweet, variant = "card", onReply, tourAnchor = false }) 
     <article
       {...tourStop(
         tourAnchor,
-        4,
-        "Quote Tweet",
-        "For your own take, open the repeat menu and choose Quote Tweet."
+        2,
+        "Your Timeline",
+        "Your timeline shows posts from the accounts you follow, newest first."
       )}
       onClick={openDetail}
       className="mb-4 w-full cursor-pointer rounded-xl border border-border bg-surface p-5 transition-colors hover:bg-surface"

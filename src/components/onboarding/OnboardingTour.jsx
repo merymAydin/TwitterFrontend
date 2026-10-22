@@ -10,8 +10,14 @@ import { ROUTES } from "../../router";
  * PiixPal's React wrapper does not forward refs, so the custom element is
  * reached through its own DOM node. The tour itself is fully driven by the
  * data-tour / data-tour-step / data-tour-title attributes in the real UI:
- * Scout's ctl.start() discovers them, and ctl.next()/back()/end() are handled
- * by the library's own card (Skip / Back / Next).
+ * Scout's ctl.start() discovers them (ordered by data-tour-step), and
+ * ctl.next()/back()/end() are handled by the library's own card.
+ *
+ * The ten stops all live on Home: the composer, the first feed card (timeline,
+ * reply, retweet/quote, like/bookmark) and the persistent chrome (search,
+ * Explore / Profile / Notifications entries, the sidebar itself). Pages that
+ * live on other routes are introduced through those sidebar entries, so the
+ * tour never navigates on its own.
  *
  * Completion is stored per user so the tour auto-runs on the first visit only.
  * Skipping and finishing both count as "seen"; the sidebar button can always
@@ -22,7 +28,7 @@ const STORAGE_PREFIX = "tweet-tour:v1:";
 const SCOUT_SELECTOR = 'piix-pal[pal="scout"]';
 const COMPOSER_SELECTOR = '[data-tour-step="1"]';
 const TWEET_SELECTOR = '[data-tour-step="2"]';
-const SEARCH_SELECTOR = '[data-tour-step="5"]';
+const SEARCH_SELECTOR = '[data-tour-step="4"]';
 
 function readCompletion(key) {
   try {

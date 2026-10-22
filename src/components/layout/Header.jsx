@@ -8,8 +8,8 @@ export function Header() {
       <div className="flex items-center gap-4">
         <div
           className="relative w-64"
-          data-tour="Use the search bar to find tweets and people across the app."
-          data-tour-step="5"
+          data-tour="Search finds tweets and people across the app."
+          data-tour-step="4"
           data-tour-title="Search"
         >
           <Search size={16} strokeWidth={1.5} className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground-muted" />

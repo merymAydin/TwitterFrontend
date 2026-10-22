@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/axios";
 import { ENDPOINTS } from "../../api/endpoints";
+import { formatApiError } from "../../lib/utils";
 
 // Login: POST /auth/login with JSON body { email, password }.
 // Response: JSON object { "token": "JWT_TOKEN" }.
@@ -11,7 +12,7 @@ export const login = createAsyncThunk("auth/login", async (credentials, { reject
     localStorage.setItem("token", token);
     return { token, isAuthenticated: true };
   } catch (error) {
-    return rejectWithValue(error.response?.data || "Login failed");
+    return rejectWithValue(formatApiError(error, "Login failed"));
   }
 });
 
@@ -21,7 +22,9 @@ export const register = createAsyncThunk("auth/register", async (userData, { rej
     const response = await api.post(ENDPOINTS.USERS.REGISTER, userData);
     return response.data;
   } catch (error) {
-    return rejectWithValue(error.response?.data || "Registration failed");
+    // The backend responds with { status, message, timestamp }; passing that
+    // object through to <ErrorMessage> crashes React (error #31), so flatten it.
+    return rejectWithValue(formatApiError(error, "Registration failed"));
   }
 });
 
@@ -35,7 +38,7 @@ export const fetchCurrentUser = createAsyncThunk(
       const response = await api.get(ENDPOINTS.USERS.ME);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Failed to load current user");
+      return rejectWithValue(formatApiError(error, "Failed to load current user"));
     }
   }
 );

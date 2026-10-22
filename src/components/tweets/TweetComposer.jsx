@@ -69,7 +69,7 @@ export function TweetComposer() {
   return (
     <div
       className="bg-white border border-border rounded-2xl p-4 shadow-sm"
-      data-tour="Write your thoughts and hit Post to share your first tweet."
+      data-tour="Share what's on your mind, then hit Post to send your first tweet."
       data-tour-step="1"
       data-tour-title="Create a tweet"
     >
