@@ -2,14 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Declare the color scheme explicitly so Edge/Chrome mobile auto-dark
+         mode cannot repaint the app on its own. The app theme controls it. -->
+    <meta name="color-scheme" content="only light" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>twitterfrontend</title>
     <script>
       (function() {
+        // The app's saved theme is the source of truth. When no choice has been
+        // saved yet, start in the app's light theme instead of inheriting the
+        // OS/browser preference (which made fresh Edge/mobile profiles dark).
         var stored = localStorage.getItem("theme");
-        var theme = stored === "dark" || stored === "light" ? stored : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-        if (theme === "dark") document.documentElement.classList.add("dark");
+        var theme = stored === "dark" || stored === "light" ? stored : "light";
+        document.documentElement.classList.toggle("dark", theme === "dark");
+        document.documentElement.dataset.theme = theme;
+        var scheme = document.querySelector('meta[name="color-scheme"]');
+        if (scheme) scheme.setAttribute("content", theme === "dark" ? "dark" : "only light");
       })();
     </script>
   </head>

@@ -123,13 +123,15 @@ function applyTourTheme() {
       }
       .card p { color: var(--tt-muted); font: 400 14px/1.55 var(--tt-font); }
       .card .row { margin-top: 16px; gap: 8px; }
-      .card button {
+      .card button,
+      .card a.b {
         padding: 10px 16px;
         border-radius: 999px;
         background: var(--tt-accent);
         color: #fff;
         font: 600 13px/1 var(--tt-font);
         box-shadow: none;
+        cursor: pointer;
         transition: background-color .15s, transform .08s;
       }
       .card button:hover { background: var(--tt-accent-hover); }

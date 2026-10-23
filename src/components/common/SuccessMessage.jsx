@@ -1,7 +1,7 @@
 export function SuccessMessage({ message }) {
   if (!message) return null;
   return (
-    <div className="mb-4 p-3 rounded-md border border-[#2d79f3] bg-[#f0f7ff] text-[#1d4ed8] text-[0.875rem]">
+    <div className="mb-4 p-3 rounded-md border border-cobalt/40 bg-cobalt/10 text-cobalt text-[0.875rem]">
       {message}
     </div>
   );

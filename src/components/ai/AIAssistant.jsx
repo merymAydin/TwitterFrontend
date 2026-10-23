@@ -64,8 +64,8 @@ function CharacterEyes() {
   return (
     <div className="relative flex h-full w-full items-center justify-center">
       <div className="flex items-center justify-center gap-[18px] transition-opacity duration-300 group-hover:opacity-0">
-        <span className="ai-eye h-[30px] w-[15px] rounded-[10px] bg-white shadow-[0_2px_18px_rgba(0,0,0,0.18)]" />
-        <span className="ai-eye h-[30px] w-[15px] rounded-[10px] bg-white shadow-[0_2px_18px_rgba(0,0,0,0.18)]" />
+        <span className="ai-eye ai-eye-white h-[30px] w-[15px] rounded-[10px] shadow-[0_2px_18px_rgba(0,0,0,0.18)]" />
+        <span className="ai-eye ai-eye-white h-[30px] w-[15px] rounded-[10px] shadow-[0_2px_18px_rgba(0,0,0,0.18)]" />
       </div>
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
         <svg className="w-[34px]" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -221,10 +221,10 @@ export function AIAssistant() {
             type="button"
             onClick={() => openAssistant(null)}
             aria-label="Open AI assistant"
-            className="relative block h-[96px] w-[96px] cursor-pointer overflow-hidden rounded-[28px] bg-white/55 shadow-[0_10px_40px_rgba(0,0,60,0.25)] transition-transform duration-300 group-hover:scale-[1.03]"
+            className="relative block h-[96px] w-[96px] cursor-pointer overflow-hidden rounded-[28px] bg-surface-elevated/55 shadow-[0_10px_40px_rgba(0,0,60,0.25)] transition-transform duration-300 group-hover:scale-[1.03]"
           >
             <BlurBalls ballSize={42} blur={24} />
-            <div className="absolute inset-0 bg-white/10 backdrop-blur-[18px]" />
+            <div className="absolute inset-0 bg-background/10 backdrop-blur-[18px]" />
             <div className="relative z-10 h-full w-full p-3">
               <CharacterEyes />
             </div>
@@ -233,16 +233,16 @@ export function AIAssistant() {
 
         {isOpen && (
           /* ── The chat panel (open state) ─────────────────────────────── */
-          <div className="relative h-[560px] w-[410px] max-h-[calc(100dvh_-_3rem)] max-w-[calc(100vw_-_2rem)] overflow-hidden rounded-[34px] bg-white/50 shadow-[0_20px_60px_rgba(0,0,60,0.3)]">
+          <div className="relative h-[560px] w-[410px] max-h-[calc(100dvh_-_3rem)] max-w-[calc(100vw_-_2rem)] overflow-hidden rounded-[34px] bg-surface-elevated/50 shadow-[0_20px_60px_rgba(0,0,60,0.3)]">
             <BlurBalls slow ballSize={92} />
-            <div className="absolute inset-0 bg-white/20 backdrop-blur-[26px]" />
+            <div className="absolute inset-0 bg-background/20 backdrop-blur-[26px]" />
 
             <div className="relative z-10 h-full w-full p-[7px]">
-              <div className="flex h-full flex-col overflow-hidden rounded-[28px] bg-white/85 backdrop-blur-[18px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.55)]">
+              <div className="flex h-full flex-col overflow-hidden rounded-[28px] bg-surface-elevated/90 ring-1 ring-border backdrop-blur-[18px]">
                 {/* Header */}
                 <div className="flex shrink-0 items-center justify-between px-4 pt-3 pb-2">
                   <div className="flex items-center gap-2">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1A1A1A]/5">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-foreground/5">
                       <span className="h-2 w-2 rounded-full bg-gradient-to-br from-[#9147ff] to-[#05e0f5]" />
                     </span>
                     <span className="text-xs font-medium text-foreground-muted">
@@ -253,7 +253,7 @@ export function AIAssistant() {
                     type="button"
                     onClick={closeAssistant}
                     aria-label="Close assistant"
-                    className="flex h-7 w-7 items-center justify-center rounded-full text-foreground-muted transition-colors hover:bg-black/5 hover:text-foreground"
+                    className="flex h-7 w-7 items-center justify-center rounded-full text-foreground-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
                   >
                     <X size={16} strokeWidth={2} />
                   </button>
@@ -263,7 +263,7 @@ export function AIAssistant() {
                     stays above every conversation message. The tweet itself is
                     never a chat message. */}
                 {contextTweet && (
-                  <div className="mx-3 mt-1 mb-2 flex shrink-0 items-center gap-2 rounded-2xl border border-black/5 bg-white/70 px-2.5 py-1.5">
+                  <div className="mx-3 mt-1 mb-2 flex shrink-0 items-center gap-2 rounded-2xl border border-border bg-surface/70 px-2.5 py-1.5">
                     <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-[#ec4899] to-[#9147ff]" />
                     <div className="min-w-0 flex-1">
                       <div className="text-[10px] font-medium uppercase tracking-wide text-foreground-muted">
@@ -277,7 +277,7 @@ export function AIAssistant() {
                       type="button"
                       onClick={clearContext}
                       aria-label="Clear tweet context"
-                      className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-foreground-muted transition-colors hover:bg-black/5 hover:text-foreground"
+                      className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-foreground-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
                     >
                       <X size={12} strokeWidth={2} />
                     </button>
@@ -315,10 +315,10 @@ export function AIAssistant() {
                       <div
                         className={`max-w-[82%] rounded-2xl px-3 py-2 text-[13.5px] leading-relaxed ${
                           msg.role === 'user'
-                            ? 'rounded-br-md bg-[#1A1A1A] text-white'
+                            ? 'rounded-br-md bg-foreground text-background'
                             : msg.failed
                               ? 'rounded-bl-md border border-red-200 bg-red-50 text-red-600'
-                              : 'rounded-bl-md border border-black/5 bg-white/90 text-foreground'
+                              : 'rounded-bl-md border border-border bg-surface/90 text-foreground'
                         }`}
                       >
                         {msg.text}
@@ -337,7 +337,7 @@ export function AIAssistant() {
 
                 {/* Input — pinned to the bottom of the panel */}
                 <form onSubmit={handleSend} className="shrink-0 px-3 pt-1 pb-3">
-                  <div className="flex items-end gap-2 rounded-[22px] bg-white/80 p-1.5 shadow-[inset_0_1px_4px_rgba(0,0,0,0.06)]">
+                  <div className="flex items-end gap-2 rounded-[22px] bg-surface/80 p-1.5 ring-1 ring-border shadow-[inset_0_1px_4px_rgba(0,0,0,0.06)]">
                     <textarea
                       ref={textareaRef}
                       value={input}

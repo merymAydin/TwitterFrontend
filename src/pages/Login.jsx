@@ -24,17 +24,17 @@ export function Login() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#faf9f6] px-4 py-8">
+    <div className="flex min-h-screen items-center justify-center bg-background px-4 py-8">
       <form
         onSubmit={handleSubmit}
-        className="flex w-full max-w-[450px] flex-col gap-[14px] rounded-[20px] bg-white p-[30px] font-sans"
+        className="flex w-full max-w-[450px] flex-col gap-[14px] rounded-[20px] border border-border bg-surface-elevated p-[30px] font-sans"
       >
         {/* Logo */}
         <div className="mb-3 text-center">
           <h1 className="font-serif text-[36px] font-bold leading-tight text-[#2d5bea]">
             t.
           </h1>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-foreground-muted">
             Sign in to your account
           </p>
         </div>
@@ -48,16 +48,16 @@ export function Login() {
         <div className="flex flex-col gap-2">
           <label
             htmlFor="email"
-            className="text-sm font-semibold text-[#151717]"
+            className="text-sm font-semibold text-foreground"
           >
             Email
           </label>
 
-          <div className="flex h-[50px] w-full items-center gap-[10px] rounded-[10px] border-[1.5px] border-[#ecedec] bg-white px-[10px] transition focus-within:border-[#2d79f3]">
+          <div className="flex h-[50px] w-full items-center gap-[10px] rounded-[10px] border-[1.5px] border-border bg-surface-elevated px-[10px] transition focus-within:border-[#2d79f3]">
             <Mail
               size={20}
               strokeWidth={1.8}
-              className="h-5 w-5 shrink-0 text-[#151717]"
+              className="h-5 w-5 shrink-0 text-foreground-muted"
             />
 
             <input
@@ -69,7 +69,7 @@ export function Login() {
               onChange={(e) => setEmail(e.target.value)}
               autoComplete="email"
               required
-              className="h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-[#151717] outline-none placeholder:text-gray-400 focus:ring-0 autofill:shadow-[inset_0_0_0_1000px_white] autofill:[-webkit-text-fill-color:#151717]"
+              className="h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-foreground outline-none placeholder:text-foreground-muted focus:ring-0"
             />
           </div>
         </div>
@@ -78,16 +78,16 @@ export function Login() {
         <div className="flex flex-col gap-2">
           <label
             htmlFor="password"
-            className="text-sm font-semibold text-[#151717]"
+            className="text-sm font-semibold text-foreground"
           >
             Password
           </label>
 
-          <div className="flex h-[50px] w-full items-center gap-[10px] rounded-[10px] border-[1.5px] border-[#ecedec] bg-white px-[10px] transition focus-within:border-[#2d79f3]">
+          <div className="flex h-[50px] w-full items-center gap-[10px] rounded-[10px] border-[1.5px] border-border bg-surface-elevated px-[10px] transition focus-within:border-[#2d79f3]">
             <Lock
               size={20}
               strokeWidth={1.8}
-              className="h-5 w-5 shrink-0 text-[#151717]"
+              className="h-5 w-5 shrink-0 text-foreground-muted"
             />
 
             <input
@@ -99,14 +99,14 @@ export function Login() {
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
               required
-              className="h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-[#151717] outline-none placeholder:text-gray-400 focus:ring-0 autofill:shadow-[inset_0_0_0_1000px_white] autofill:[-webkit-text-fill-color:#151717]"
+              className="h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-foreground outline-none placeholder:text-foreground-muted focus:ring-0"
             />
           </div>
         </div>
 
         {/* Remember me */}
         <div className="flex items-center justify-between gap-2 text-[13px]">
-          <label className="flex cursor-pointer items-center gap-2 text-[#151717]">
+          <label className="flex cursor-pointer items-center gap-2 text-foreground">
             <input
               type="checkbox"
               checked={rememberMe}
@@ -116,7 +116,7 @@ export function Login() {
             Remember me
           </label>
 
-          <span className="cursor-pointer text-[#2d79f3]">
+          <span className="text-[#2d79f3]">
             Forgot password?
           </span>
         </div>
@@ -125,13 +125,13 @@ export function Login() {
         <button
   type="submit"
   disabled={loading}
-  className="mt-1 flex h-[50px] w-full items-center justify-center rounded-[10px] border-0 !bg-[#151717] px-4 text-[15px] font-medium !text-white transition-colors hover:!bg-[#303535] disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
+  className="mt-1 flex h-[50px] w-full items-center justify-center rounded-[10px] border-0 bg-foreground px-4 text-[15px] font-medium text-background transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
 >
   {loading ? "Signing in..." : "Sign In"}
 </button>
 
          
-        <p className="my-1 text-center text-sm text-black">
+        <p className="my-1 text-center text-sm text-foreground-muted">
           Don't have an account?{" "}
           <Link
             to={ROUTES.REGISTER}
@@ -142,18 +142,17 @@ export function Login() {
         </p>
 
         {/* Divider */}
-        <div className="my-1 flex items-center gap-3 text-center text-sm text-black">
-          <span className="h-px flex-1 bg-[#ecedec]" />
+        <div className="my-1 flex items-center gap-3 text-center text-sm text-foreground-muted">
+          <span className="h-px flex-1 bg-border" />
           Or With
-          <span className="h-px flex-1 bg-[#ecedec]" />
+          <span className="h-px flex-1 bg-border" />
         </div>
 
          
         <div className="flex gap-[10px]">
           <button
             type="button"
-            className="flex h-[50px] flex-1 items-center justify-center gap-2 rounded-[10px] border border-[#ededef] bg-white text-sm font-medium text-[#151717] transition hover:border-[#2d79f3] 
-            cursor-pointer"
+            className="flex h-[50px] flex-1 items-center justify-center gap-2 rounded-[10px] border border-border bg-surface-elevated text-sm font-medium text-foreground transition hover:border-[#2d79f3] cursor-pointer"
           >
             <svg viewBox="0 0 48 48" className="h-5 w-5 shrink-0">
               <path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.6c3.9-3.6 6.1-8.8 6.1-15z" />
@@ -166,7 +165,7 @@ export function Login() {
 
           <button
             type="button"
-            className="flex h-[50px] flex-1 items-center justify-center gap-2 rounded-[10px] border border-[#ededef] bg-white text-sm font-medium text-[#151717] transition hover:border-[#2d79f3] cursor-pointer"
+            className="flex h-[50px] flex-1 items-center justify-center gap-2 rounded-[10px] border border-border bg-surface-elevated text-sm font-medium text-foreground transition hover:border-[#2d79f3] cursor-pointer"
           >
             <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0">
               <path

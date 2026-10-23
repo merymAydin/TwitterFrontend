@@ -6,7 +6,9 @@ export function AppLink({ to, children, className, activeClassName, active = tru
       to={to}
       end={end}
       className={({ isActive }) => {
-        const base = "text-foreground transition-colors";
+        // Colour is inherited (body/foreground) so per-link text-* classes such
+        // as text-cobalt or text-[…] are not overridden by a base utility.
+        const base = "transition-colors";
         const hover = "hover:bg-border hover:text-cobalt";
         const focus = "focus:outline-none focus-visible:ring-2 focus-visible:ring-cobalt focus-visible:ring-offset-2";
         const isActiveState = active && isActive;
